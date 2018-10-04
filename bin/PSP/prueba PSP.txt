@@ -1,0 +1,76 @@
+S -> A uno B C
+S -> S dos
+A -> B C D
+A -> A tres
+A -> e
+B -> D cuatro C tres
+B -> e
+C -> cinco D B
+C -> e
+D -> seis
+D -> e
+
+#
+A! -> tres
+B! -> e
+B! -> B C D
+A -> B C D AA
+A -> AA
+AA -> tres AA
+AA -> e
+#
+#
+A! -> dos
+B! -> A uno B C
+S -> A uno B C SS
+SS -> dos SS
+SS -> e
+#
+
+S -> A uno B C SS
+SS -> dos SS
+SS -> e
+A -> B C D AA
+A -> AA
+AA -> tres AA
+AA -> e
+B -> D cuatro C tres
+B -> e
+C -> cinco D B
+C -> e
+D -> seis
+D -> e
+
+prim(D) -> {e, seis}
+prim(C) -> {e, cinco}
+prim(B) -> {e, seis, cuatro}
+prim(AA) -> {e, tres}
+prim(A) -> {e, tres, seis, cuatro, cinco}
+prim(SS) -> {e, dos}
+prim(S) -> {tres, seis, cuatro, cinco, uno}
+
+sig(S) -> {$}
+sig(SS) -> {$}
+sig(A) -> {uno}
+sig(AA) -> {uno}
+sig(B) -> {cinco, dos, $, seis, tres, uno}
+sig(C) -> {dos, $, seis, tres, uno}
+sig(D) -> {tres, uno, cuatro, seis, dos, $}
+
+predi(S -> A uno B C SS) -> {tres, seis, cuatro, cinco, uno}
+predi(SS -> dos SS) -> {dos}
+predi(SS -> e) -> {$}
+predi(A -> B C D AA) -> {seis, cuatro, cinco, tres, uno}
+predi(A -> AA) -> {tres, uno}
+predi(AA -> tres AA) -> {tres}
+predi(AA -> e) -> {uno}
+predi(B -> D cuatro C tres) -> {seis, cuatro}
+predi(B -> e) -> {cinco, dos, $, seis, tres, uno}
+predi(C -> cinco D B) -> {cinco}
+predi(C -> e) -> {dos, $, seis, tres, uno}
+predi(D -> seis) -> {seis}
+predi(D -> e) -> {tres, uno, cuatro, seis, dos, $}
+
+predictions [['tres', 'seis', 'cinco', 'cuatro', 'uno'], ['dos'], ['$'], ['cuatro', 'seis', 'cinco', 'tres', 'uno'], ['tres', 'uno'], ['tres'], ['uno'], ['seis', 'cuatro'], ['cinco', 'dos', '$', 'seis', 'tres', 'uno'], ['cinco'], ['dos', '$', 'seis', 'tres', 'uno'], ['seis'], ['tres', 'uno', 'cuatro', 'seis', 'dos', '$']]
+
+
